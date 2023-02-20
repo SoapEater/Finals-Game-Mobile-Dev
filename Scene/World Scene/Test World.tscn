@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Asset/World Asset/Tileset-Polished.png" type="Texture" id=1]
 [ext_resource path="res://Scene/Character Scene/Character.tscn" type="PackedScene" id=2]
@@ -29,6 +29,9 @@ resource_local_to_scene = true
 0/shapes = [  ]
 0/z_index = 0
 
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 119, 10 )
+
 [node name="Parallax Background Test" type="Node2D"]
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
@@ -42,3 +45,9 @@ tile_data = PoolIntArray( 1245205, 0, 3, 1310741, 0, 65539, 1376277, 0, 65539, 1
 
 [node name="KinematicBody2D" parent="." instance=ExtResource( 2 )]
 position = Vector2( 145, 259 )
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2( 186, 292 )
+shape = SubResource( 2 )
