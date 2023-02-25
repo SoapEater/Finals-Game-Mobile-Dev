@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://Asset/Character Asset/isekai_character.png" type="Texture" id=1]
-[ext_resource path="res://Scene/Character Scene/Character.gd" type="Script" id=2]
+[ext_resource path="res://Script/Character Script/Character Movement.gd" type="Script" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 6.5, 13.5 )
@@ -12,7 +12,7 @@ script = ExtResource( 2 )
 __meta__ = {
 "_edit_group_": true
 }
-SPEED = 100
+speed = 100
 
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 1 )
