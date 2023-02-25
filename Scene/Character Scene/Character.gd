@@ -17,7 +17,7 @@ func _physics_process(delta):
 		velocity.x = -SPEED
 	else:
 		velocity.x = 0
-	if Input.is_action_pressed("ui_up"):
+	if Input.is_action_pressed("ui_jump"):
 		if on_ground == true:
 			velocity.y = JUMP_POWER
 			on_ground = false
