@@ -3,18 +3,22 @@ extends KinematicBody2D
 #--------------------------------------------------------------------------------------------------------------#
 #variables
 export var speed : int
-export var jumpPower : int
-export var gravity : int
-export var jumpHeight : float
-export var jumpPeak : float
-export var jumpFall : float
+var jumpPower : int
+var gravity : float
 #--------------------------------------------------------------------------------------------------------------#
-var onGrounds = false
+#variables for custom jump physics
+export (float) var jumpPeak = .5
+export (int) var jumpHeight = 128
+
+#--------------------------------------------------------------------------------------------------------------#
 var floors = Vector2(0, -1)
 var velocity = Vector2()
 #--------------------------------------------------------------------------------------------------------------#
+func _ready():
+	gravity = (2*jumpHeight)/pow(jumpPeak,2)
+	jumpPower = gravity * jumpPeak
+#--------------------------------------------------------------------------------------------------------------#
 func _physics_process(delta):
-	grounded()
 	gravity()
 	characterMovement()
 #--------------------------------------------------------------------------------------------------------------#
@@ -30,20 +34,12 @@ func characterMovement():
 	if Input.is_action_pressed("ui_left") && Input.is_action_pressed("ui_right"):
 		velocity.x = 0
 	#--------------------------------------------------#	
-	if Input.is_action_pressed("ui_jump"):
-		if onGrounds == true:
-			velocity.y = -jumpPower
-			onGrounds = false
+	if Input.is_action_pressed("ui_jump") && is_on_floor():
+		velocity.y = -jumpPower
 	#--------------------------------------------------#
 	velocity = move_and_slide(velocity, floors)
 	#--------------------------------------------------#
 #--------------------------------------------------------------------------------------------------------------#
 func gravity():
 	velocity.y += gravity
-#--------------------------------------------------------------------------------------------------------------#
-func grounded():
-	if is_on_floor():
-		onGrounds = true
-	else:
-		onGrounds = false
 #--------------------------------------------------------------------------------------------------------------#
