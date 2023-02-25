@@ -13,6 +13,8 @@ __meta__ = {
 "_edit_group_": true
 }
 speed = 100
+jumpPower = 250
+gravity = 10
 
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 1 )

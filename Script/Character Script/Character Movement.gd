@@ -2,9 +2,12 @@
 extends KinematicBody2D
 #--------------------------------------------------------------------------------------------------------------#
 #variables
-export var speed = 60
-export var jumpPower = 250
-export var gravity = 10
+export var speed : int
+export var jumpPower : int
+export var gravity : int
+export var jumpHeight : float
+export var jumpPeak : float
+export var jumpFall : float
 #--------------------------------------------------------------------------------------------------------------#
 var onGrounds = false
 var floors = Vector2(0, -1)
