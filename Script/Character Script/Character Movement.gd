@@ -28,9 +28,9 @@ func _physics_process(delta):
 func characterMovement(delta):
 	#--------------------------------------------------#
 	if Input.is_action_pressed("ui_left"):
-		velocity.x = -speed * delta
+		velocity.x = - (speed * delta) * speed
 	elif Input.is_action_pressed("ui_right"):
-		velocity.x = speed * delta
+		velocity.x = (speed * delta) * speed
 	else:
 		velocity.x = 0
 	#--------------------------------------------------#
@@ -38,21 +38,26 @@ func characterMovement(delta):
 		velocity.x = 0
 	#--------------------------------------------------#	
 	if Input.is_action_pressed("ui_jump") && is_on_floor():
-		velocity.y = -jumpPower * delta
+		velocity.y = - (jumpPower * delta) * jumpPower
 	#--------------------------------------------------#
-	velocity = move_and_slide(velocity * delta, floors)
+	velocity = move_and_slide(velocity, floors)
 	#--------------------------------------------------#
 #--------------------------------------------------------------------------------------------------------------#
 func gravity(delta):
 	velocity.y += gravity * delta
 #--------------------------------------------------------------------------------------------------------------#
 func animationPlayer():
+	#--------------------------------------------------#
+	if velocity.x > 0:
+		position2D.scale.x = 1
+	elif velocity.x < 0:
+		position2D.scale.x = -1
+	#--------------------------------------------------#
 	if is_on_floor() && velocity.x == 0:
 		animationPlayer.play("Idle")
 	elif is_on_floor() && velocity.x > 0:
-		position2D.scale.x = 1
 		animationPlayer.play("Walking")
 	elif is_on_floor() && velocity.x < 0:
-		position2D.scale.x = -1
 		animationPlayer.play("Walking")
+	#--------------------------------------------------#
 #--------------------------------------------------------------------------------------------------------------#
