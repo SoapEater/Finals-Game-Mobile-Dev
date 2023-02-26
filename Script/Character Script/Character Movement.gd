@@ -4,7 +4,7 @@ extends KinematicBody2D
 #variables
 export var speed : int
 var jumpPower : int
-var gravity : float	
+var gravity : float
 #--------------------------------------------------------------------------------------------------------------#
 #variables for custom jump physics
 export var jumpPeak : float
@@ -21,16 +21,16 @@ func _ready():
 	jumpPower = gravity * jumpPeak
 #--------------------------------------------------------------------------------------------------------------#
 func _physics_process(delta):
-	gravity()
-	characterMovement()
+	gravity(delta)
+	characterMovement(delta)
 	animationPlayer()
 #--------------------------------------------------------------------------------------------------------------#
-func characterMovement():
+func characterMovement(delta):
 	#--------------------------------------------------#
 	if Input.is_action_pressed("ui_left"):
-		velocity.x = -speed
+		velocity.x = -speed * delta
 	elif Input.is_action_pressed("ui_right"):
-		velocity.x = speed
+		velocity.x = speed * delta
 	else:
 		velocity.x = 0
 	#--------------------------------------------------#
@@ -38,13 +38,13 @@ func characterMovement():
 		velocity.x = 0
 	#--------------------------------------------------#	
 	if Input.is_action_pressed("ui_jump") && is_on_floor():
-		velocity.y = -jumpPower
+		velocity.y = -jumpPower * delta
 	#--------------------------------------------------#
-	velocity = move_and_slide(velocity, floors)
+	velocity = move_and_slide(velocity * delta, floors)
 	#--------------------------------------------------#
 #--------------------------------------------------------------------------------------------------------------#
-func gravity():
-	velocity.y += gravity
+func gravity(delta):
+	velocity.y += gravity * delta
 #--------------------------------------------------------------------------------------------------------------#
 func animationPlayer():
 	if is_on_floor() && velocity.x == 0:
