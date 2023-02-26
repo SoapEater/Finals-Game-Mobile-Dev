@@ -9,7 +9,9 @@ var gravity : float
 #variables for custom jump physics
 export var jumpPeak : float
 export var jumpHeight : int
-
+#--------------------------------------------------------------------------------------------------------------#
+onready var animationPlayer = $Position2D/AnimationPlayer
+onready var position2D = $Position2D
 #--------------------------------------------------------------------------------------------------------------#
 var floors = Vector2(0, -1)
 var velocity = Vector2()
@@ -21,6 +23,7 @@ func _ready():
 func _physics_process(delta):
 	gravity()
 	characterMovement()
+	animationPlayer()
 #--------------------------------------------------------------------------------------------------------------#
 func characterMovement():
 	#--------------------------------------------------#
@@ -42,4 +45,14 @@ func characterMovement():
 #--------------------------------------------------------------------------------------------------------------#
 func gravity():
 	velocity.y += gravity
+#--------------------------------------------------------------------------------------------------------------#
+func animationPlayer():
+	if is_on_floor() && velocity.x == 0:
+		animationPlayer.play("Idle")
+	elif is_on_floor() && velocity.x > 0:
+		position2D.scale.x = 1
+		animationPlayer.play("Walking")
+	elif is_on_floor() && velocity.x < 0:
+		position2D.scale.x = -1
+		animationPlayer.play("Walking")
 #--------------------------------------------------------------------------------------------------------------#
