@@ -11,7 +11,7 @@ config_version=4
 [application]
 
 config/name="2D-Kai TTIGRAA2P"
-run/main_scene="res://Scene/World Scene/Test World.tscn"
+run/main_scene="res://Scene/World Scene/Test-World.tscn"
 
 [autoload]
 
@@ -100,4 +100,5 @@ ui_jump={
 
 [physics]
 
+common/physics_fps=144
 common/enable_pause_aware_picking=true
