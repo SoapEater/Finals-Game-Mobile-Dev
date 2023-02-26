@@ -7,8 +7,8 @@ var jumpPower : int
 var gravity : float	
 #--------------------------------------------------------------------------------------------------------------#
 #variables for custom jump physics
-export (float) var jumpPeak = .5
-export (int) var jumpHeight = 128
+export var jumpPeak : float
+export var jumpHeight : int
 
 #--------------------------------------------------------------------------------------------------------------#
 var floors = Vector2(0, -1)
