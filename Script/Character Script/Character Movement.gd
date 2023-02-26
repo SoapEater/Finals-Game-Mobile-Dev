@@ -4,7 +4,7 @@ extends KinematicBody2D
 #variables
 export var speed : int
 var jumpPower : int
-var gravity : float
+var gravity : float	
 #--------------------------------------------------------------------------------------------------------------#
 #variables for custom jump physics
 export (float) var jumpPeak = .5
