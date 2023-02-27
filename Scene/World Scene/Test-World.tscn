@@ -176,4 +176,6 @@ tile_data = PoolIntArray( 1507326, 0, 0, 1507327, 0, 2, 1572862, 0, 65536, 15728
 
 [node name="KinematicBody2D" parent="." instance=ExtResource( 2 )]
 position = Vector2( 182, 220 )
-jumpHeight = 128
+speed = 80
+jumpPeak = 40.0
+jumpHeight = 5000
