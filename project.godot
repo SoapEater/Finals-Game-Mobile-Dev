@@ -98,6 +98,10 @@ ui_jump={
  ]
 }
 
+[input_devices]
+
+pointing/emulate_touch_from_mouse=true
+
 [physics]
 
 common/physics_fps=144
