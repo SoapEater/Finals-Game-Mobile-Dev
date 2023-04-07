@@ -101,3 +101,5 @@ __meta__ = {
 
 [node name="inventory" type="TouchScreenButton" parent="Control_inventory"]
 normal = ExtResource( 6 )
+passby_press = true
+action = "ui_inventory"
