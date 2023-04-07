@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Asset/Miscellaneous Asset/Controls GUI/Left_Button.png" type="Texture" id=1]
 [ext_resource path="res://Asset/Miscellaneous Asset/Controls GUI/Right_Button.png" type="Texture" id=2]
@@ -6,15 +6,19 @@
 [ext_resource path="res://Asset/Miscellaneous Asset/Controls GUI/Attack_Button.png" type="Texture" id=4]
 [ext_resource path="res://Asset/Miscellaneous Asset/Controls GUI/Settings_Button.png" type="Texture" id=5]
 [ext_resource path="res://Asset/Miscellaneous Asset/Controls GUI/Inventory_Button.png" type="Texture" id=6]
+[ext_resource path="res://Script/Miscellaneous Script/Control_inventory.gd" type="Script" id=7]
+[ext_resource path="res://Asset/Miscellaneous Asset/Controls GUI/Left_Button_Pressed.png" type="Texture" id=8]
+[ext_resource path="res://Asset/Miscellaneous Asset/Controls GUI/Right_Button_Pressed.png" type="Texture" id=9]
+[ext_resource path="res://Asset/Miscellaneous Asset/Controls GUI/Inventory_Button_Pressed.png" type="Texture" id=10]
 
 [node name="UI_Controls" type="CanvasLayer"]
 
 [node name="Control_Left" type="Control" parent="."]
-anchor_top = 0.8
-anchor_right = 0.112
+anchor_top = 1.0
 anchor_bottom = 1.0
 margin_left = 24.0
-margin_right = 0.32
+margin_top = -72.0
+margin_right = 72.0
 margin_bottom = -24.0
 __meta__ = {
 "_edit_group_": true
@@ -22,14 +26,16 @@ __meta__ = {
 
 [node name="left" type="TouchScreenButton" parent="Control_Left"]
 normal = ExtResource( 1 )
+pressed = ExtResource( 8 )
 passby_press = true
 action = "ui_left"
 
 [node name="Control_Right" type="Control" parent="."]
-anchor_top = 0.8
-anchor_right = 0.25
+anchor_top = 1.0
 anchor_bottom = 1.0
 margin_left = 112.0
+margin_top = -72.0
+margin_right = 160.0
 margin_bottom = -24.0
 __meta__ = {
 "_edit_group_": true
@@ -37,15 +43,17 @@ __meta__ = {
 
 [node name="right" type="TouchScreenButton" parent="Control_Right"]
 normal = ExtResource( 2 )
+pressed = ExtResource( 9 )
 passby_press = true
 action = "ui_right"
 
 [node name="Control_Jump" type="Control" parent="."]
-anchor_left = 0.887
-anchor_top = 0.8
+anchor_left = 1.0
+anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 0.320007
+margin_left = -72.0
+margin_top = -72.0
 margin_right = -24.0
 margin_bottom = -24.0
 __meta__ = {
@@ -58,11 +66,12 @@ passby_press = true
 action = "ui_jump"
 
 [node name="Control_attack" type="Control" parent="."]
-anchor_left = 0.75
-anchor_top = 0.8
+anchor_left = 1.0
+anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = -3.05176e-05
+margin_left = -160.0
+margin_top = -72.0
 margin_right = -112.0
 margin_bottom = -24.0
 __meta__ = {
@@ -74,12 +83,12 @@ normal = ExtResource( 4 )
 passby_press = true
 
 [node name="Control_settings" type="Control" parent="."]
-anchor_left = 0.887
+anchor_left = 1.0
 anchor_right = 1.0
-anchor_bottom = 0.2
-margin_left = 0.320007
+margin_left = -72.0
 margin_top = 24.0
 margin_right = -24.0
+margin_bottom = 72.0
 __meta__ = {
 "_edit_group_": true
 }
@@ -88,18 +97,21 @@ __meta__ = {
 normal = ExtResource( 5 )
 
 [node name="Control_inventory" type="Control" parent="."]
-anchor_left = 0.462
-anchor_top = 0.8
-anchor_right = 0.537
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
 anchor_bottom = 1.0
-margin_left = 0.320007
-margin_right = 0.320007
+margin_left = -24.0
+margin_top = -72.0
+margin_right = 24.0
 margin_bottom = -24.0
+script = ExtResource( 7 )
 __meta__ = {
 "_edit_group_": true
 }
 
 [node name="inventory" type="TouchScreenButton" parent="Control_inventory"]
 normal = ExtResource( 6 )
+pressed = ExtResource( 10 )
 passby_press = true
 action = "ui_inventory"
