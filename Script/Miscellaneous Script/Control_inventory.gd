@@ -1,6 +1,8 @@
-extends Node2D
+extends Control
 
 func openInventory():
 	if Input.is_action_pressed("ui_inventory"):
 		print("Inventory opened")
-		$TextureRect.visible = false
+
+func _process(delta):
+	openInventory()
