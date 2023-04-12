@@ -11,7 +11,7 @@ config_version=4
 [application]
 
 config/name="2D-Kai TTIGRAA2P"
-run/main_scene="res://Scene/World Scene/Test-World.tscn"
+run/main_scene="res://Scene/Miscellaneous Scene/Intro/Intro.tscn"
 
 [autoload]
 
