@@ -1,0 +1,99 @@
+[gd_scene load_steps=11 format=2]
+
+[ext_resource path="res://Asset/Miscellaneous Asset/ChiKareGo2.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://Asset/Miscellaneous Asset/Menu GUI/Start_Button.png" type="Texture" id=2]
+[ext_resource path="res://Asset/Miscellaneous Asset/Menu GUI/Start_Button_Pressed.png" type="Texture" id=3]
+[ext_resource path="res://Asset/Miscellaneous Asset/Menu GUI/Exit_Button.png" type="Texture" id=4]
+[ext_resource path="res://Asset/Miscellaneous Asset/Menu GUI/Setting_Large_Button_Pressed.png" type="Texture" id=5]
+[ext_resource path="res://Asset/Miscellaneous Asset/Menu GUI/Exit_Button_Pressed.png" type="Texture" id=6]
+[ext_resource path="res://Asset/Miscellaneous Asset/Menu GUI/Setting_Large_Button.png" type="Texture" id=7]
+[ext_resource path="res://Script/Miscellaneous Script/Menu Screen Script/Menu.gd" type="Script" id=8]
+[ext_resource path="res://Asset/Miscellaneous Asset/Menu GUI/istockphoto-1333010525-170667a.jpg" type="Texture" id=9]
+
+[sub_resource type="DynamicFont" id=1]
+size = 29
+font_data = ExtResource( 1 )
+
+[node name="Menu" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 8 )
+
+[node name="Background" type="TextureRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource( 9 )
+stretch_mode = 1
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="Title" type="CenterContainer" parent="."]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -320.0
+margin_top = 24.0
+margin_right = 320.0
+margin_bottom = 114.0
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Title Label" type="Label" parent="Title"]
+margin_left = 124.0
+margin_right = 516.0
+margin_bottom = 90.0
+custom_fonts/font = SubResource( 1 )
+text = "2D Kai: 
+That time I've got reincarnated
+as a 2D-Platformer Player"
+align = 1
+
+[node name="Start" type="Control" parent="."]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -96.0
+margin_top = 128.0
+margin_right = 96.0
+margin_bottom = 176.0
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Start" type="TouchScreenButton" parent="Start"]
+normal = ExtResource( 2 )
+pressed = ExtResource( 3 )
+
+[node name="Settings" type="Control" parent="."]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -96.0
+margin_top = 192.0
+margin_right = 96.0
+margin_bottom = 240.0
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Settings" type="TouchScreenButton" parent="Settings"]
+normal = ExtResource( 7 )
+pressed = ExtResource( 5 )
+
+[node name="Exit" type="Control" parent="."]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -96.0
+margin_top = 256.0
+margin_right = 96.0
+margin_bottom = 304.0
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Exit" type="TouchScreenButton" parent="Exit"]
+normal = ExtResource( 4 )
+pressed = ExtResource( 6 )
+
+[connection signal="released" from="Start/Start" to="." method="_on_Start_released"]
+[connection signal="released" from="Settings/Settings" to="." method="_on_Settings_released"]
+[connection signal="released" from="Exit/Exit" to="." method="_on_Exit_released"]
