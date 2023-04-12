@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://Asset/Miscellaneous Asset/Controls GUI/Left_Button.png" type="Texture" id=1]
 [ext_resource path="res://Asset/Miscellaneous Asset/Controls GUI/Right_Button.png" type="Texture" id=2]
@@ -6,12 +6,16 @@
 [ext_resource path="res://Asset/Miscellaneous Asset/Controls GUI/Attack_Button.png" type="Texture" id=4]
 [ext_resource path="res://Asset/Miscellaneous Asset/Controls GUI/Settings_Button.png" type="Texture" id=5]
 [ext_resource path="res://Asset/Miscellaneous Asset/Controls GUI/Inventory_Button.png" type="Texture" id=6]
-[ext_resource path="res://Script/Miscellaneous Script/Control_inventory.gd" type="Script" id=7]
+[ext_resource path="res://Script/Miscellaneous Script/Control Scripts/UI_Controls.gd" type="Script" id=7]
 [ext_resource path="res://Asset/Miscellaneous Asset/Controls GUI/Left_Button_Pressed.png" type="Texture" id=8]
 [ext_resource path="res://Asset/Miscellaneous Asset/Controls GUI/Right_Button_Pressed.png" type="Texture" id=9]
 [ext_resource path="res://Asset/Miscellaneous Asset/Controls GUI/Inventory_Button_Pressed.png" type="Texture" id=10]
+[ext_resource path="res://Asset/Miscellaneous Asset/Controls GUI/Settings_Button_Pressed.png" type="Texture" id=11]
+[ext_resource path="res://Asset/Miscellaneous Asset/Controls GUI/Attack_Button_Pressed.png" type="Texture" id=12]
+[ext_resource path="res://Asset/Miscellaneous Asset/Controls GUI/Jump_Button_Pressed.png" type="Texture" id=13]
 
 [node name="UI_Controls" type="CanvasLayer"]
+script = ExtResource( 7 )
 
 [node name="Control_Left" type="Control" parent="."]
 anchor_top = 1.0
@@ -62,6 +66,7 @@ __meta__ = {
 
 [node name="jump" type="TouchScreenButton" parent="Control_Jump"]
 normal = ExtResource( 3 )
+pressed = ExtResource( 13 )
 passby_press = true
 action = "ui_jump"
 
@@ -80,6 +85,7 @@ __meta__ = {
 
 [node name="attack" type="TouchScreenButton" parent="Control_attack"]
 normal = ExtResource( 4 )
+pressed = ExtResource( 12 )
 passby_press = true
 
 [node name="Control_settings" type="Control" parent="."]
@@ -95,6 +101,7 @@ __meta__ = {
 
 [node name="settings" type="TouchScreenButton" parent="Control_settings"]
 normal = ExtResource( 5 )
+pressed = ExtResource( 11 )
 
 [node name="Control_inventory" type="Control" parent="."]
 anchor_left = 0.5
@@ -105,7 +112,6 @@ margin_left = -24.0
 margin_top = -72.0
 margin_right = 24.0
 margin_bottom = -24.0
-script = ExtResource( 7 )
 __meta__ = {
 "_edit_group_": true
 }
