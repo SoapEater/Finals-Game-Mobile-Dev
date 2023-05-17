@@ -35,9 +35,6 @@ func _on_Button_pressed():
 	else:
 		getMusicNode.play()
 	
-	
-
-
 func _on_Button2_pressed():
 	if getSFXNode.playing:
 		getSFXNode.stop()
