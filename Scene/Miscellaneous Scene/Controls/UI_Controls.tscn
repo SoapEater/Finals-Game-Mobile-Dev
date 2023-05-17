@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://Asset/Miscellaneous Asset/Controls GUI/Left_Button.png" type="Texture" id=1]
 [ext_resource path="res://Asset/Miscellaneous Asset/Controls GUI/Right_Button.png" type="Texture" id=2]
@@ -9,6 +9,7 @@
 [ext_resource path="res://Script/Miscellaneous Script/Control Scripts/UI_Controls.gd" type="Script" id=7]
 [ext_resource path="res://Asset/Miscellaneous Asset/Controls GUI/Left_Button_Pressed.png" type="Texture" id=8]
 [ext_resource path="res://Asset/Miscellaneous Asset/Controls GUI/Right_Button_Pressed.png" type="Texture" id=9]
+[ext_resource path="res://Scene/Miscellaneous Scene/Controls/Control_settings.gd" type="Script" id=10]
 [ext_resource path="res://Asset/Miscellaneous Asset/Controls GUI/Settings_Button_Pressed.png" type="Texture" id=11]
 [ext_resource path="res://Asset/Miscellaneous Asset/Controls GUI/Attack_Button_Pressed.png" type="Texture" id=12]
 [ext_resource path="res://Asset/Miscellaneous Asset/Controls GUI/Jump_Button_Pressed.png" type="Texture" id=13]
@@ -82,29 +83,42 @@ __meta__ = {
 "_edit_group_": true
 }
 
-[node name="attack" type="TouchScreenButton" parent="Control_attack"]
+[node name="Attack" type="TouchScreenButton" parent="Control_attack"]
 normal = ExtResource( 4 )
 pressed = ExtResource( 12 )
-passby_press = true
+action = "ui_attack"
 
-[node name="Settings" parent="." instance=ExtResource( 6 )]
-visible = true
+[node name="TextureButton" type="TextureButton" parent="Control_attack"]
+visible = false
+anchor_left = -0.5
+anchor_right = -0.5
+margin_left = -40.0
+margin_bottom = 40.0
+action_mode = 0
+texture_normal = ExtResource( 4 )
+texture_pressed = ExtResource( 12 )
 
 [node name="Control_settings" type="Control" parent="."]
+pause_mode = 2
 anchor_left = 1.0
 anchor_right = 1.0
 margin_left = -72.0
 margin_top = 24.0
 margin_right = -24.0
 margin_bottom = 72.0
+script = ExtResource( 10 )
 __meta__ = {
 "_edit_group_": true
 }
 
-[node name="TextureButton" type="TextureButton" parent="Control_settings"]
+[node name="Settings" type="TextureButton" parent="Control_settings"]
 margin_right = 48.0
 margin_bottom = 48.0
 texture_normal = ExtResource( 5 )
 texture_pressed = ExtResource( 11 )
 
-[connection signal="pressed" from="Control_settings/TextureButton" to="." method="_on_TextureButton_pressed"]
+[node name="Settings" parent="." instance=ExtResource( 6 )]
+pause_mode = 2
+
+[connection signal="pressed" from="Control_attack/TextureButton" to="." method="_on_TextureButton_pressed"]
+[connection signal="pressed" from="Control_settings/Settings" to="." method="_on_Settings_pressed"]

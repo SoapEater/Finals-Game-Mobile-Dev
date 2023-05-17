@@ -15,24 +15,40 @@ onready var position2D = $Position2D
 #--------------------------------------------------------------------------------------------------------------#
 var floors = Vector2(0, -1)
 var velocity = Vector2()
+var stateMachine
 #--------------------------------------------------------------------------------------------------------------#
 func _ready():
 	gravity = (2*jumpHeight)/pow(jumpPeak,2)
 	jumpPower = gravity * jumpPeak
+	
+	stateMachine = $Position2D/AnimationTree.get("parameters/playback")
 #--------------------------------------------------------------------------------------------------------------#
 func _physics_process(delta):
 	#--------------------------------------------------#
 	gravity()
 	characterMovement(delta)
-	animationPlayer()
 	#--------------------------------------------------#
 #--------------------------------------------------------------------------------------------------------------#
 func characterMovement(delta):
 	#--------------------------------------------------#
+	var current = stateMachine.get_current_node()
+	#--------------------------------------------------#
+	if Input.is_action_just_released("ui_attack"):
+		stateMachine.travel("Attack")
+		return
+	if velocity.x == 0:
+		stateMachine.travel("Idle")
+	if velocity.x != 0:
+		stateMachine.travel("Walking")
+	#--------------------------------------------------#
 	if Input.is_action_pressed("ui_left"):
 		velocity.x = -speed
+#		
+		position2D.scale.x = -1
 	elif Input.is_action_pressed("ui_right"):
 		velocity.x = speed
+#		
+		position2D.scale.x = 1
 	else:
 		velocity.x = 0
 	#--------------------------------------------------#
@@ -41,25 +57,11 @@ func characterMovement(delta):
 	#--------------------------------------------------#	
 	if Input.is_action_pressed("ui_jump") && is_on_floor():
 		velocity.y = -jumpPower
+		
 	#--------------------------------------------------#
 	velocity = move_and_slide(velocity, floors)
 	#--------------------------------------------------#
 #--------------------------------------------------------------------------------------------------------------#
 func gravity():
 	velocity.y += gravity
-#--------------------------------------------------------------------------------------------------------------#
-func animationPlayer():
-	#--------------------------------------------------#
-	if velocity.x > 0:
-		position2D.scale.x = 1
-	elif velocity.x < 0:
-		position2D.scale.x = -1
-	#--------------------------------------------------#
-	if is_on_floor() && velocity.x == 0:
-		animationPlayer.play("Idle")
-	elif is_on_floor() && velocity.x > 0:
-		animationPlayer.play("Walking")
-	elif is_on_floor() && velocity.x < 0:
-		animationPlayer.play("Walking")
-	#--------------------------------------------------#
 #--------------------------------------------------------------------------------------------------------------#

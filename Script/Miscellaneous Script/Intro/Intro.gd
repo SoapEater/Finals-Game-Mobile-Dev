@@ -8,5 +8,4 @@ func _ready():
 	AnimationPlayerVar.play("Fade Out")
 	yield(get_tree().create_timer(3), "timeout")
 	get_tree().change_scene("res://Scene/Miscellaneous Scene/Menu Screen/Menu.tscn")
-	
 #--------------------------------------------------------------------------------------------------------------#
