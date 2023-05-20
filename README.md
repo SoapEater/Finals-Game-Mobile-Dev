@@ -5,18 +5,18 @@
 2D platformer project for mobile development. 
 
 Developers:
-  Rehum Baraquil
-  Fhranz Joseph Benosa
-  Ron Carl Dilao
+  Rehum Baraquil,
+  Fhranz Joseph Benosa,
+  Ron Carl Dilao,
   Perry Andre Moya
   
 Programmer:
-  Rehum Baraquil
-  Fhranz Joseph Benosa
+  Rehum Baraquil,
+  Fhranz Joseph Benosa,
   Ron Carl Dilao
   
 Graphics Designer:
-  Rehum Baraquil
+  Rehum Baraquil,
   Perry Andre Moya
   
 UI Design:
