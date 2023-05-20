@@ -1,5 +1,4 @@
 extends StateMachine
-
 #------------------------------------------------------------------------------------------#
 func stateLogic(delta):
 	addState("attack")
