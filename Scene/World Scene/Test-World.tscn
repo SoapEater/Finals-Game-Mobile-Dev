@@ -1,8 +1,10 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://Asset/World Asset/Tileset-Polished.png" type="Texture" id=1]
 [ext_resource path="res://Scene/World Scene/ParallaxBackground_But_Better.tscn" type="PackedScene" id=2]
-[ext_resource path="res://Scene/Enemy Scene/Slime.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Scene/Miscellaneous Scene/Settings/Settings Button.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Script/World Script/Test-World.gd" type="Script" id=5]
+[ext_resource path="res://Scene/Enemy Scene/Slime.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Scene/Character Scene/Wizard.tscn" type="PackedScene" id=8]
 
 [sub_resource type="ConvexPolygonShape2D" id=2]
@@ -168,9 +170,10 @@ resource_local_to_scene = true
 0/z_index = 0
 
 [node name="Parallax Background Test" type="Node2D"]
+script = ExtResource( 5 )
 
 [node name="Wizard" parent="." instance=ExtResource( 8 )]
-position = Vector2( 285, 274 )
+position = Vector2( 280, 280 )
 
 [node name="TileMap" type="TileMap" parent="."]
 position = Vector2( 0, -360 )
@@ -181,5 +184,12 @@ tile_data = PoolIntArray( 589822, 0, 0, 589823, 0, 1, 524288, 0, 1, 524289, 0, 1
 
 [node name="ParallaxBackground" parent="." instance=ExtResource( 2 )]
 
-[node name="Slime" parent="." instance=ExtResource( 3 )]
-position = Vector2( 341, 283 )
+[node name="Settings" parent="." instance=ExtResource( 4 )]
+visible = false
+
+[node name="Slime" parent="." instance=ExtResource( 6 )]
+position = Vector2( 384, 288 )
+
+[node name="Slime2" parent="." instance=ExtResource( 6 )]
+visible = false
+position = Vector2( 344, 288 )

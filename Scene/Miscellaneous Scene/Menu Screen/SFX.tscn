@@ -1,9 +1,8 @@
 [gd_scene load_steps=2 format=2]
 
-[ext_resource path="res://Asset/Miscellaneous Asset/Music/Metal pipe falling sound effect but it’s more violent.wav" type="AudioStream" id=1]
+[ext_resource path="res://Asset/Miscellaneous Asset/Music/07_human_atk_sword_3.wav" type="AudioStream" id=1]
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer"]
 pause_mode = 2
 stream = ExtResource( 1 )
-volume_db = -25.345
 bus = "SFX"

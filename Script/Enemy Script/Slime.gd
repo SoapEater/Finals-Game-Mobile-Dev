@@ -3,6 +3,7 @@ extends KinematicBody2D
 onready var getAnimationTree = $Position2D/AnimationTree
 onready var getRaycastEnvironment = $DetectEnvironmentCollision
 onready var getPosition2D = $Position2D
+onready var getHurtbox = $Hurtbox 
 
 var jumpPower : int
 var gravity : int
@@ -11,30 +12,39 @@ var floors = Vector2(0, -1)
 var velocity = Vector2()
 var stateMachine
 var isRaycastColliding = true
-var isAttacking
+var isPlayerInside = false
 
 export var speed = 100
 export (float) var jumpPeak = .128
 export (int) var jumpHeight = 128
+export var damage = 10
+
+var state = MOVE
+
+enum{
+	MOVE,
+	ATTACK
+}
 #--------------------------------------------------------------------------------------------------------------#
 func _ready():
 	stateMachine = getAnimationTree.get("parameters/playback")
-	
 	getAnimationTree.active = true
-#	stateMachine.travel("Walking")
-	$Position2D/AnimationPlayer.play("Walking")
 	
 	gravity = (2*jumpHeight)/pow(jumpPeak,2)
 	jumpPower = gravity * jumpPeak
 #--------------------------------------------------------------------------------------------------------------#
 func _physics_process(delta):
 	velocity.y += gravity
-	
-	moveCharacter()
 	turnDirectionOnDetect()
 	
+	if state == MOVE:
+		moveCharacter(delta)
+	elif state == ATTACK:
+		enemyAttack()
+	
 #--------------------------------------------------------------------------------------------------------------#
-func moveCharacter():
+func moveCharacter(delta):
+	
 	if isRaycastColliding:
 		velocity.x = speed
 	else:
@@ -48,18 +58,24 @@ func turnDirectionOnDetect():
 		scale.x = -scale.x
 #--------------------------------------------------------------------------------------------------------------#
 func hit():
-	$DamageArea.monitoring = true
-func endOfHit():
-	$DamageArea.monitoring = false
-	
-func startWalking():
-	$Position2D/AnimationPlayer.play("Walking")
-#--------------------------------------------------------------------------------------------------------------#
-func _on_PlayerDetector_body_entered(body):
-	stateMachine.travel("Attack") #This doesn't work
-	$Position2D/AnimationPlayer.play("Attack") #Does work
+	getHurtbox.set_deferred("monitoring", true)
 
-func _on_DamageArea_body_entered(body):
-	get_tree().reload_current_scene()
-	print("player hit")
+func endOfHit():
+	getHurtbox.set_deferred("monitoring", false)
+
+func startWalking():
+	if isPlayerInside == false:
+		state = MOVE
+	else:
+		stateMachine.travel("Attack")
+#--------------------------------------------------------------------------------------------------------------#
+func _on_PlayerDetector_body_exited(body):
+	isPlayerInside = false
+func _on_PlayerDetector_body_entered(body):
+	isPlayerInside = true
+	state = ATTACK
+#--------------------------------------------------------------------------------------------------------------#
+#--------------------------------------------------------------------------------------------------------------#
+func enemyAttack():
+	stateMachine.travel("Attack")
 #--------------------------------------------------------------------------------------------------------------#

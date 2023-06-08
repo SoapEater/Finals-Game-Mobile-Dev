@@ -1,0 +1,30 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Asset/Miscellaneous Asset/Controls GUI/Settings_Button_Pressed.png" type="Texture" id=1]
+[ext_resource path="res://Asset/Miscellaneous Asset/Controls GUI/Settings_Button.png" type="Texture" id=2]
+[ext_resource path="res://Script/Miscellaneous Script/Settings Script/Settings Button.gd" type="Script" id=3]
+[ext_resource path="res://Scene/Miscellaneous Scene/Settings/Settings.tscn" type="PackedScene" id=4]
+
+[node name="Settings" type="CanvasLayer"]
+pause_mode = 2
+script = ExtResource( 3 )
+
+[node name="TextureButton" type="TextureButton" parent="."]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -88.0
+margin_top = 40.0
+margin_right = -40.0
+margin_bottom = 88.0
+texture_normal = ExtResource( 2 )
+texture_pressed = ExtResource( 1 )
+expand = true
+
+[node name="Settings" parent="." instance=ExtResource( 4 )]
+pause_mode = 2
+margin_left = -336.0
+margin_top = -164.0
+margin_right = -336.0
+margin_bottom = -164.0
+
+[connection signal="pressed" from="TextureButton" to="." method="_on_TextureButton_pressed"]

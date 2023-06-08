@@ -1,8 +1,9 @@
 [gd_scene load_steps=2 format=2]
 
-[ext_resource path="res://Asset/Miscellaneous Asset/Music/SABATON - The Attack of the Dead Men (Official Lyric Video).ogg" type="AudioStream" id=1]
+[ext_resource path="res://Asset/Miscellaneous Asset/Music/Forest Track.wav" type="AudioStream" id=1]
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer"]
 pause_mode = 2
 stream = ExtResource( 1 )
+volume_db = -15.0
 bus = "Music"

@@ -1,7 +1,7 @@
-[gd_scene load_steps=28 format=2]
+[gd_scene load_steps=32 format=2]
 
 [ext_resource path="res://Asset/Character Asset/Character_Animation_Spritesheet.png" type="Texture" id=1]
-[ext_resource path="res://Script/Wizard_StateMachine.gd" type="Script" id=2]
+[ext_resource path="res://Scene/Miscellaneous Scene/Hitbox.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Script/Character Script/Wizard.gd" type="Script" id=3]
 [ext_resource path="res://Asset/Miscellaneous Asset/Controls GUI/Left_Button.png" type="Texture" id=4]
 [ext_resource path="res://Asset/Miscellaneous Asset/Controls GUI/Left_Button_Pressed.png" type="Texture" id=5]
@@ -11,9 +11,28 @@
 [ext_resource path="res://Asset/Miscellaneous Asset/Controls GUI/Jump_Button.png" type="Texture" id=9]
 [ext_resource path="res://Asset/Miscellaneous Asset/Controls GUI/Attack_Button.png" type="Texture" id=10]
 [ext_resource path="res://Asset/Miscellaneous Asset/Controls GUI/Attack_Button_Pressed.png" type="Texture" id=11]
+[ext_resource path="res://Scene/Miscellaneous Scene/Healthbar.tscn" type="PackedScene" id=12]
+[ext_resource path="res://Asset/Miscellaneous Asset/Music/07_human_atk_sword_3.wav" type="AudioStream" id=13]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 7, 11.5 )
+
+[sub_resource type="Animation" id=24]
+resource_name = "Damage"
+length = 0.1
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("Position2D/Sprite:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.05, 0.1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 0, 0, 1 ), Color( 1, 1, 1, 1 ) ]
+}
 
 [sub_resource type="Animation" id=2]
 resource_name = "Idle"
@@ -68,10 +87,65 @@ tracks/3/keys = {
 "values": [ 0, 1, 2, 3, 4, 5, 6, 7 ]
 }
 
+[sub_resource type="Animation" id=25]
+resource_name = "InvulnerabilityFlash"
+length = 0.1
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("Position2D/Sprite:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.05, 0.1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ true, false, true ]
+}
+
+[sub_resource type="Animation" id=3]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Position2D/Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Position2D/Sprite:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Position2D/Sprite:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ true ]
+}
+
 [sub_resource type="Animation" id=7]
-resource_name = "Melee Attack"
+resource_name = "Range Attack"
 length = 0.8
-loop = true
 tracks/0/type = "value"
 tracks/0/path = NodePath("Position2D/Sprite:texture")
 tracks/0/interp = 1
@@ -120,20 +194,19 @@ tracks/3/keys = {
 "update": 1,
 "values": [ 16, 17, 18, 19, 20, 21, 22, 23 ]
 }
-
-[sub_resource type="Animation" id=3]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/path = NodePath("Position2D/Sprite:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0 ),
+tracks/4/type = "method"
+tracks/4/path = NodePath(".")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0.8 ),
 "transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ 0 ]
+"values": [ {
+"args": [  ],
+"method": "characterAttackFinished"
+} ]
 }
 
 [sub_resource type="Animation" id=4]
@@ -193,7 +266,7 @@ tracks/3/keys = {
 animation = "Idle"
 
 [sub_resource type="AnimationNodeAnimation" id=9]
-animation = "Melee Attack"
+animation = "Range Attack"
 
 [sub_resource type="AnimationNodeAnimation" id=10]
 animation = "Walking"
@@ -215,25 +288,22 @@ auto_advance = true
 [sub_resource type="AnimationNodeStateMachine" id=15]
 states/Idle/node = SubResource( 19 )
 states/Idle/position = Vector2( -763, -338 )
-"states/Melee Attack/node" = SubResource( 9 )
-"states/Melee Attack/position" = Vector2( -523, -455 )
+"states/Range Attack/node" = SubResource( 9 )
+"states/Range Attack/position" = Vector2( -523, -455 )
 states/Walking/node = SubResource( 10 )
 states/Walking/position = Vector2( -763, -455 )
-transitions = [ "Walking", "Melee Attack", SubResource( 17 ), "Melee Attack", "Walking", SubResource( 18 ), "Walking", "Idle", SubResource( 20 ), "Idle", "Walking", SubResource( 21 ), "Idle", "Melee Attack", SubResource( 22 ), "Melee Attack", "Idle", SubResource( 23 ) ]
+transitions = [ "Walking", "Range Attack", SubResource( 17 ), "Range Attack", "Walking", SubResource( 18 ), "Walking", "Idle", SubResource( 20 ), "Idle", "Walking", SubResource( 21 ), "Idle", "Range Attack", SubResource( 22 ), "Range Attack", "Idle", SubResource( 23 ) ]
 start_node = "Idle"
-graph_offset = Vector2( -1212.8, -529 )
+graph_offset = Vector2( -1475.8, -534 )
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=16]
 
-[node name="KinematicBody2D" type="KinematicBody2D"]
+[node name="Wizard" type="KinematicBody2D" groups=["Player"]]
 collision_layer = 2
 script = ExtResource( 3 )
 speed = 80
 jumpPeak = 40.0
 jumpHeight = 5000
-
-[node name="StateMachine" type="Node" parent="."]
-script = ExtResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0, 4.5 )
@@ -248,9 +318,11 @@ vframes = 5
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Position2D"]
 root_node = NodePath("../..")
+anims/Damage = SubResource( 24 )
 anims/Idle = SubResource( 2 )
-"anims/Melee Attack" = SubResource( 7 )
+anims/InvulnerabilityFlash = SubResource( 25 )
 anims/RESET = SubResource( 3 )
+"anims/Range Attack" = SubResource( 7 )
 anims/Walking = SubResource( 4 )
 
 [node name="AnimationTree" type="AnimationTree" parent="Position2D"]
@@ -340,4 +412,20 @@ pressed = ExtResource( 8 )
 passby_press = true
 action = "ui_jump"
 
+[node name="Healthbar" parent="Ui_Controls" instance=ExtResource( 12 )]
+visible = false
+
+[node name="SFX" type="Node" parent="."]
+
+[node name="MeleeSFX" type="AudioStreamPlayer" parent="SFX"]
+stream = ExtResource( 13 )
+bus = "SFX"
+
+[node name="Hitbox" parent="." instance=ExtResource( 2 )]
+collision_layer = 8
+collision_mask = 64
+monitoring = false
+monitorable = false
+
 [connection signal="pressed" from="Ui_Controls/Control_Attack/Attack_Button" to="." method="_on_Attack_Button_pressed"]
+[connection signal="area_entered" from="Hitbox" to="." method="_on_Hitbox_area_entered"]

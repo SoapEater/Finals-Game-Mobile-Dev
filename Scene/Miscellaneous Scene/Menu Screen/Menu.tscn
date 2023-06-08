@@ -1,15 +1,13 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://Asset/Miscellaneous Asset/ChiKareGo2.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://Asset/Miscellaneous Asset/Menu GUI/Start_Button.png" type="Texture" id=2]
 [ext_resource path="res://Asset/Miscellaneous Asset/Menu GUI/Start_Button_Pressed.png" type="Texture" id=3]
 [ext_resource path="res://Asset/Miscellaneous Asset/Menu GUI/Exit_Button.png" type="Texture" id=4]
-[ext_resource path="res://Asset/Miscellaneous Asset/Controls GUI/Settings_Button.png" type="Texture" id=5]
+[ext_resource path="res://Scene/Miscellaneous Scene/Settings/Settings Button.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Asset/Miscellaneous Asset/Menu GUI/Exit_Button_Pressed.png" type="Texture" id=6]
-[ext_resource path="res://Asset/Miscellaneous Asset/Controls GUI/Settings_Button_Pressed.png" type="Texture" id=7]
 [ext_resource path="res://Script/Miscellaneous Script/Menu Screen Script/Menu.gd" type="Script" id=8]
 [ext_resource path="res://Asset/Miscellaneous Asset/Menu GUI/istockphoto-1333010525-170667a.jpg" type="Texture" id=9]
-[ext_resource path="res://Scene/Miscellaneous Scene/Settings/Settings.tscn" type="PackedScene" id=10]
 
 [sub_resource type="Shader" id=4]
 
@@ -39,6 +37,8 @@ font_data = ExtResource( 1 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 script = ExtResource( 8 )
+
+[node name="Settings Button" parent="." instance=ExtResource( 5 )]
 
 [node name="Background" type="TextureRect" parent="."]
 anchor_right = 1.0
@@ -87,25 +87,6 @@ __meta__ = {
 normal = ExtResource( 2 )
 pressed = ExtResource( 3 )
 
-[node name="Settings3" type="Control" parent="."]
-pause_mode = 2
-anchor_left = 0.5
-anchor_right = 0.5
-margin_left = 256.0
-margin_top = 16.0
-margin_right = 304.0
-margin_bottom = 64.0
-__meta__ = {
-"_edit_group_": true
-}
-
-[node name="TextureButton" type="TextureButton" parent="Settings3"]
-pause_mode = 2
-margin_right = 40.0
-margin_bottom = 40.0
-texture_normal = ExtResource( 5 )
-texture_pressed = ExtResource( 7 )
-
 [node name="Exit" type="Control" parent="."]
 anchor_left = 0.5
 anchor_right = 0.5
@@ -121,9 +102,5 @@ __meta__ = {
 normal = ExtResource( 4 )
 pressed = ExtResource( 6 )
 
-[node name="Settings" parent="." instance=ExtResource( 10 )]
-pause_mode = 2
-
 [connection signal="released" from="Start/Start" to="." method="_on_Start_released"]
-[connection signal="pressed" from="Settings3/TextureButton" to="." method="_on_TextureButton_pressed"]
 [connection signal="released" from="Exit/Exit" to="." method="_on_Exit_released"]
