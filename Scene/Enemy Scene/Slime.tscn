@@ -65,7 +65,7 @@ tracks/4/loop_wrap = true
 tracks/4/imported = false
 tracks/4/enabled = true
 tracks/4/keys = {
-"times": PoolRealArray( 0.4, 0.7, 0.8 ),
+"times": PoolRealArray( 0.5, 0.7, 0.8 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "values": [ {
 "args": [  ],
@@ -261,7 +261,6 @@ jumpPeak = 40.0
 jumpHeight = 5000
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
 shape = SubResource( 5 )
 
 [node name="Position2D" type="Position2D" parent="."]
@@ -284,7 +283,6 @@ anim_player = NodePath("../AnimationPlayer")
 parameters/playback = SubResource( 2 )
 
 [node name="DetectEnvironmentCollision" type="RayCast2D" parent="."]
-visible = false
 position = Vector2( 11, -12 )
 enabled = true
 cast_to = Vector2( 0, 24 )
@@ -300,8 +298,6 @@ shape = SubResource( 17 )
 [node name="Hurtbox" parent="." instance=ExtResource( 3 )]
 collision_layer = 64
 collision_mask = 8
-monitoring = false
-monitorable = false
 
 [node name="CollisionShape2D" parent="Hurtbox" index="0"]
 position = Vector2( 7, -4 )
