@@ -7,7 +7,7 @@ func _ready():
 	pass
 
 func _on_TitleButton_pressed():
-	get_tree().change_scene("res://Scene/Miscellaneous Scene/Menu Screen/Menu.tscn")
+	SceneTransition.SceneTransition("res://Scene/Miscellaneous Scene/Menu Screen/Menu.tscn")
 	var newPauseState = not get_tree().paused
 	get_tree().paused = newPauseState
 

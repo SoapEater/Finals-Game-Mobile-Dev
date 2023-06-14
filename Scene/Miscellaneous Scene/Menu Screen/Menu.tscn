@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://Asset/Miscellaneous Asset/ChiKareGo2.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://Asset/Miscellaneous Asset/Menu GUI/Start_Button.png" type="Texture" id=2]
@@ -6,8 +6,9 @@
 [ext_resource path="res://Asset/Miscellaneous Asset/Menu GUI/Exit_Button.png" type="Texture" id=4]
 [ext_resource path="res://Scene/Miscellaneous Scene/Settings/Settings Button.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Asset/Miscellaneous Asset/Menu GUI/Exit_Button_Pressed.png" type="Texture" id=6]
+[ext_resource path="res://Asset/Miscellaneous Asset/Menu GUI/gaym logo2.png" type="Texture" id=7]
 [ext_resource path="res://Script/Miscellaneous Script/Menu Screen Script/Menu.gd" type="Script" id=8]
-[ext_resource path="res://Asset/Miscellaneous Asset/Menu GUI/istockphoto-1333010525-170667a.jpg" type="Texture" id=9]
+[ext_resource path="res://Asset/World Asset/Free Pixel Art Forest/PNG/Background layers/Background.png" type="Texture" id=9]
 
 [sub_resource type="Shader" id=4]
 
@@ -44,28 +45,27 @@ script = ExtResource( 8 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 texture = ExtResource( 9 )
-stretch_mode = 1
-__meta__ = {
-"_edit_use_anchors_": true
-}
+expand = true
 
 [node name="Title" type="CenterContainer" parent="."]
+visible = false
 material = SubResource( 6 )
 anchor_left = 0.5
 anchor_right = 0.5
-margin_left = -318.0
-margin_top = 20.0
-margin_right = 322.0
-margin_bottom = 110.0
+margin_left = -128.0
+margin_top = 48.0
+margin_right = 320.0
+margin_bottom = 176.0
 __meta__ = {
 "_edit_group_": true
 }
 
 [node name="Title Label" type="Label" parent="Title"]
 material = SubResource( 7 )
-margin_left = 124.0
-margin_right = 516.0
-margin_bottom = 90.0
+margin_left = 28.0
+margin_top = 19.0
+margin_right = 420.0
+margin_bottom = 109.0
 custom_fonts/font = SubResource( 8 )
 text = "2D Kai: 
 That time I've got reincarnated
@@ -73,12 +73,12 @@ as a 2D-Platformer Player"
 align = 1
 
 [node name="Start" type="Control" parent="."]
-anchor_left = 0.5
-anchor_right = 0.5
-margin_left = -96.0
-margin_top = 192.0
-margin_right = 96.0
-margin_bottom = 240.0
+anchor_top = 0.622
+anchor_bottom = 0.622
+margin_left = 40.0
+margin_top = -23.92
+margin_right = 232.0
+margin_bottom = 24.08
 __meta__ = {
 "_edit_group_": true
 }
@@ -88,12 +88,12 @@ normal = ExtResource( 2 )
 pressed = ExtResource( 3 )
 
 [node name="Exit" type="Control" parent="."]
-anchor_left = 0.5
-anchor_right = 0.5
-margin_left = -96.0
-margin_top = 256.0
-margin_right = 96.0
-margin_bottom = 304.0
+anchor_top = 0.822
+anchor_bottom = 0.822
+margin_left = 40.0
+margin_top = -23.92
+margin_right = 232.0
+margin_bottom = 24.08
 __meta__ = {
 "_edit_group_": true
 }
@@ -101,6 +101,15 @@ __meta__ = {
 [node name="Exit" type="TouchScreenButton" parent="Exit"]
 normal = ExtResource( 4 )
 pressed = ExtResource( 6 )
+
+[node name="Logo" type="TextureRect" parent="."]
+margin_left = 40.0
+margin_top = 40.0
+margin_right = 168.0
+margin_bottom = 176.0
+texture = ExtResource( 7 )
+expand = true
+stretch_mode = 6
 
 [connection signal="released" from="Start/Start" to="." method="_on_Start_released"]
 [connection signal="released" from="Exit/Exit" to="." method="_on_Exit_released"]

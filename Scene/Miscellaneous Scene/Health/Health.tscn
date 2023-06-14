@@ -1,0 +1,26 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Script/Character Script/Health.gd" type="Script" id=1]
+[ext_resource path="res://Asset/Miscellaneous Asset/Health Gui/HeartFull.png" type="Texture" id=2]
+[ext_resource path="res://Asset/Miscellaneous Asset/Health Gui/HeartEmpty.png" type="Texture" id=3]
+
+[node name="Health" type="Control"]
+margin_right = 48.0
+margin_bottom = 48.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="HeartsEmpty" type="TextureRect" parent="."]
+margin_right = 48.0
+margin_bottom = 48.0
+texture = ExtResource( 3 )
+stretch_mode = 2
+
+[node name="HeartsFull" type="TextureRect" parent="."]
+margin_right = 48.0
+margin_bottom = 48.0
+texture = ExtResource( 2 )
+expand = true
+stretch_mode = 2

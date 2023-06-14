@@ -1,12 +1,45 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://Asset/Enemy Asset/Slime_Spritesheet.png" type="Texture" id=1]
 [ext_resource path="res://Scene/Miscellaneous Scene/Hurtbox.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Scene/Miscellaneous Scene/Hitbox.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Script/Enemy Script/SlimeV2.gd" type="Script" id=4]
+[ext_resource path="res://Scene/Stats.tscn" type="PackedScene" id=5]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 8, 4 )
+
+[sub_resource type="Animation" id=9]
+resource_name = "Bounced"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 24, 25, 26, 27, 28 ]
+}
+
+[sub_resource type="Animation" id=13]
+resource_name = "Death"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 32, 33, 34, 35, 36 ]
+}
 
 [sub_resource type="Animation" id=2]
 resource_name = "Moving"
@@ -40,13 +73,34 @@ tracks/0/keys = {
 "values": [ 0 ]
 }
 
+[sub_resource type="AnimationNodeAnimation" id=10]
+animation = "Bounced"
+
+[sub_resource type="AnimationNodeAnimation" id=14]
+animation = "Death"
+
 [sub_resource type="AnimationNodeAnimation" id=4]
 animation = "Moving"
 
+[sub_resource type="AnimationNodeStateMachineTransition" id=11]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=12]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=16]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=17]
+
 [sub_resource type="AnimationNodeStateMachine" id=5]
+states/Bounced/node = SubResource( 10 )
+states/Bounced/position = Vector2( 848, 145 )
+states/Death/node = SubResource( 14 )
+states/Death/position = Vector2( 711, 47 )
 states/Moving/node = SubResource( 4 )
 states/Moving/position = Vector2( 585, 145 )
+transitions = [ "Moving", "Bounced", SubResource( 11 ), "Bounced", "Moving", SubResource( 12 ), "Bounced", "Death", SubResource( 16 ), "Moving", "Death", SubResource( 17 ) ]
 start_node = "Moving"
+end_node = "Death"
+graph_offset = Vector2( 69, -21 )
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=6]
 
@@ -61,6 +115,8 @@ collision_layer = 4
 script = ExtResource( 4 )
 speed = 30
 
+[node name="Stats" parent="." instance=ExtResource( 5 )]
+
 [node name="Sprite" type="Sprite" parent="."]
 position = Vector2( 0, -8 )
 texture = ExtResource( 1 )
@@ -68,11 +124,12 @@ hframes = 8
 vframes = 5
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
 position = Vector2( 0, 4 )
 shape = SubResource( 1 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/Bounced = SubResource( 9 )
+anims/Death = SubResource( 13 )
 anims/Moving = SubResource( 2 )
 anims/RESET = SubResource( 3 )
 
@@ -82,15 +139,13 @@ anim_player = NodePath("../AnimationPlayer")
 parameters/playback = SubResource( 6 )
 
 [node name="DetectEnvironment" type="RayCast2D" parent="."]
-visible = false
 position = Vector2( 8, 8 )
 enabled = true
 cast_to = Vector2( 0, 4 )
 
 [node name="Hurtbox" parent="." instance=ExtResource( 2 )]
-visible = false
 collision_layer = 64
-collision_mask = 0
+collision_mask = 8
 
 [node name="CollisionShape2D" parent="Hurtbox" index="0"]
 position = Vector2( 0, 4 )
@@ -103,6 +158,13 @@ collision_mask = 0
 [node name="CollisionShape2D" parent="Hitbox" index="0"]
 position = Vector2( 0, 2 )
 shape = SubResource( 8 )
+
+[node name="ResetBounced" type="Timer" parent="."]
+
+[node name="DeathTimer" type="Timer" parent="."]
+
+[connection signal="timeout" from="ResetBounced" to="." method="_on_ResetBounced_timeout"]
+[connection signal="timeout" from="DeathTimer" to="." method="_on_DeathTimer_timeout"]
 
 [editable path="Hurtbox"]
 [editable path="Hitbox"]

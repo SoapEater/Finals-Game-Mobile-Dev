@@ -1,0 +1,28 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Script/Save.gd" type="Script" id=1]
+
+[node name="Save" type="Node2D"]
+visible = false
+script = ExtResource( 1 )
+
+[node name="Save" type="Button" parent="."]
+margin_right = 12.0
+margin_bottom = 20.0
+text = "Save"
+
+[node name="Load" type="Button" parent="."]
+margin_top = 32.0
+margin_right = 42.0
+margin_bottom = 52.0
+text = "Load"
+
+[node name="Reset" type="Button" parent="."]
+margin_top = 64.0
+margin_right = 12.0
+margin_bottom = 84.0
+text = "Reset"
+
+[connection signal="pressed" from="Save" to="." method="_on_Save_pressed"]
+[connection signal="pressed" from="Load" to="." method="_on_Load_pressed"]
+[connection signal="pressed" from="Reset" to="." method="_on_Reset_pressed"]

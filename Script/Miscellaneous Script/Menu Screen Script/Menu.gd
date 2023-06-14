@@ -1,7 +1,7 @@
 extends Control
 #--------------------------------------------------------------------------------------------------------------#
 func _on_Start_released():
-	get_tree().change_scene("res://Scene/World Scene/Test-World.tscn")
+	SceneTransition.SceneTransition("res://Scene/Miscellaneous Scene/Word Select.tscn")
 #--------------------------------------------------------------------------------------------------------------#
 func _on_Exit_released():
 	get_tree().quit()

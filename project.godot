@@ -31,6 +31,9 @@ UserData="*res://addons/github-integration/scripts/user_data.gd"
 RestHandler="*res://addons/github-integration/scenes/RestHandler.tscn"
 Music="*res://Scene/Miscellaneous Scene/Menu Screen/Music.tscn"
 Sfx="*res://Scene/Miscellaneous Scene/Menu Screen/SFX.tscn"
+PlayerStats="*res://Scene/Character Scene/Player Stats.tscn"
+SceneTransition="*res://Scene/World Scene/SceneTransition.tscn"
+Save="*res://Scene/Miscellaneous Scene/Save.tscn"
 
 [display]
 
