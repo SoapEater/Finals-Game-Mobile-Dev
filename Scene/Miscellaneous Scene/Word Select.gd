@@ -1,5 +1,7 @@
 extends Control
 
+onready var label = $WorldSelect
+
 func _ready():
 	Save.connect("dataLoaded", self, "_onDataLoaded")
 	Save.LoadData()
@@ -14,10 +16,26 @@ func _onDataLoaded(data):
 		var worldName = button.name
 		if data.has(worldName) and data[worldName] == true:
 			button.visible = true
+			print("working")
 		else:
 			button.visible = false
+			print("Not Working")
 
 func connectButtonToWorld(buttonName):
 	var buttonNumber := int(buttonName.replace("world", ""))
 	var nextScenePath := "res://Scene/World Scene/World" + str(buttonNumber) + ".tscn"
 	SceneTransition.SceneTransition(nextScenePath)
+	LabelDebugger.printDebug(nextScenePath)
+
+
+func _on_RESET_pressed():
+	var newData = {
+	"world1" : true,
+	"world2" : false,
+	"world3" : false,
+	"world4" : false,
+	"world5" : false,
+	}
+	Save.data = newData
+	Save.getRelevantData()
+	Save.LoadData()

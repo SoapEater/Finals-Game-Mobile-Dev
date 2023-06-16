@@ -22,12 +22,15 @@ onready var getSFXJump = $SFX/JumpSFX
 onready var bounceRaycasts = $BounceRaycasts
 onready var hitbox = $Hitbox
 onready var flashTimer = $InvincibiltyFlashTimer
+onready var positionRestart = $PositionInDeath
 #--------------------------------------------------------------------------------------------------------------#
 var floors = Vector2(0, -1)
 var velocity = Vector2()
 var stateMachine
 var state = MOVE
 var stats = PlayerStats
+
+signal playerDied
 #--------------------------------------------------------------------------------------------------------------#
 enum {
 	MOVE,
@@ -38,6 +41,8 @@ func _ready():
 	stats.connect("noHealth", self, "playDeathAnimation")
 	gravity = (2*jumpHeight)/pow(jumpPeak,2)
 	jumpPower = gravity * jumpPeak
+	
+	positionRestart.position = position
 	
 	stateMachine = $Position2D/AnimationTree.get("parameters/playback")
 	animationTree.active = true
@@ -100,5 +105,6 @@ func _on_InvincibiltyFlashTimer_timeout():
 	animationPlayer.play("RESET")
 #--------------------------------------------------------------------------------------------------------------#
 func playDeathAnimation():
-	queue_free()
+	global_position = positionRestart.position
+	stats.health = 5
 #--------------------------------------------------------------------------------------------------------------#

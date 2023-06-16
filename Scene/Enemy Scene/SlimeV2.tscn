@@ -116,6 +116,7 @@ script = ExtResource( 4 )
 speed = 30
 
 [node name="Stats" parent="." instance=ExtResource( 5 )]
+maxHealth = 2
 
 [node name="Sprite" type="Sprite" parent="."]
 position = Vector2( 0, -8 )

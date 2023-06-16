@@ -34,6 +34,7 @@ Sfx="*res://Scene/Miscellaneous Scene/Menu Screen/SFX.tscn"
 PlayerStats="*res://Scene/Character Scene/Player Stats.tscn"
 SceneTransition="*res://Scene/World Scene/SceneTransition.tscn"
 Save="*res://Scene/Miscellaneous Scene/Save.tscn"
+LabelDebugger="*res://Label Debugger.tscn"
 
 [display]
 

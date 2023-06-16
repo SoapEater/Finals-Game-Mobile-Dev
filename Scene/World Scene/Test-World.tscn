@@ -5,7 +5,7 @@
 [ext_resource path="res://Scene/Enemy Scene/SlimeV2.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Scene/Miscellaneous Scene/Settings/Settings Button.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Script/World Script/Test-World.gd" type="Script" id=5]
-[ext_resource path="res://Scene/Miscellaneous Scene/Controls/UI_Controls.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Scene/Miscellaneous Scene/Controls/Ui_Controls.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Scene/World Scene/NextWorld.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Scene/Character Scene/Wizard.tscn" type="PackedScene" id=8]
 
@@ -190,8 +190,6 @@ resource_local_to_scene = true
 [node name="Parallax Background Test" type="Node2D"]
 script = ExtResource( 5 )
 
-[node name="Ui_Controls" parent="." instance=ExtResource( 6 )]
-
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2( 272, 288 )
 current = true
@@ -233,6 +231,8 @@ position = Vector2( 352, 256 )
 
 [node name="NextWorld" parent="." instance=ExtResource( 7 )]
 position = Vector2( 432, 304 )
+
+[node name="Ui_Controls" parent="." instance=ExtResource( 6 )]
 
 [editable path="Wizard"]
 [editable path="Wizard/Hitbox"]

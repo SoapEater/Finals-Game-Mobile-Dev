@@ -1,5 +1,8 @@
 extends Control
 #--------------------------------------------------------------------------------------------------------------#
+func _ready():
+	Music.play()
+	
 func _on_Start_released():
 	SceneTransition.SceneTransition("res://Scene/Miscellaneous Scene/Word Select.tscn")
 #--------------------------------------------------------------------------------------------------------------#

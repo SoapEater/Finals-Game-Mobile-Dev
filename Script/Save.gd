@@ -1,9 +1,9 @@
 extends Node2D
 
-const SAVE_DIR = "user://saves/"
+const SAVE_DIR = "user://"
 var savePath = SAVE_DIR + "save.dat"
 signal dataLoaded(data)
-
+	
 var data = {
 	"world1" : true,
 	"world2" : false,
@@ -40,7 +40,6 @@ func LoadData():
 			print("Loaded Successfully")
 			print(LoadedData)
 			emit_signal("dataLoaded", LoadedData)
-
 
 func _on_Reset_pressed():
 	var newData = {
